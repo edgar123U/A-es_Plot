@@ -57,7 +57,9 @@ st.sidebar.header("🎨 Estética e Relatório")
 p_theme = st.sidebar.selectbox("Tema do Campo:", ["Branco Total", "Grass", "Dark", "Midnight"])
 is_strip = st.sidebar.checkbox("Relvado Cortado?", value=False)
 is_pos = st.sidebar.checkbox("Linhas Posicionais?", value=False)
-report_custom_title = st.sidebar.text_input("Título do Relatório PDF", "Relatório Técnico-Tático")
+
+# ALTERAÇÃO: Nome do Jogo em vez de Título Genérico
+game_name = st.sidebar.text_input("Nome do Jogo:", "Equipa A vs Equipa B")
 
 themes = {
     "Branco Total": {"pitch": "white", "line": "black", "stripe": "#f2f2f2"},
@@ -159,15 +161,17 @@ if not st.session_state.actions.empty:
         pdf = FPDF()
         pdf.add_page()
         if os.path.exists(fmh_logo_path): pdf.image(fmh_logo_path, x=165, y=10, w=20)
+        
+        # TÍTULO (Nome do Jogo)
         pdf.set_font("Helvetica", "B", 18); pdf.set_y(15); pdf.cell(150, 10, report_title, ln=True)
-        pdf.set_font("Helvetica", "", 10); pdf.cell(150, 6, "Faculdade de Motricidade Humana", ln=True)
+        # REMOVIDA A LINHA: Faculdade de Motricidade Humana
         
         img_buf = io.BytesIO()
         fig_pitch.savefig(img_buf, format="png", bbox_inches='tight', dpi=150)
         pdf.image(img_buf, x=15, y=35, w=180)
         
         pdf.set_y(172)
-        if current_sel_a == "":
+        if current_sel_a == "Todas" or current_sel_a == "":
             pdf.set_font("Helvetica", "B", 10); pdf.cell(190, 8, "Legenda:", ln=True)
             pdf.set_font("Helvetica", "", 8)
             for act, info in action_rules.items():
@@ -221,7 +225,8 @@ if not st.session_state.actions.empty:
         if r.Visualizacao == "Seta": p_final.arrows(r.x, r.y, r.end_x, r.end_y, width=1.5, headwidth=6, headlength=6, color=r.Cor, ax=ax_f)
         else: p_final.scatter(r.x, r.y, s=180, c=r.Cor, marker='o' if r.Resultado=='Sucesso' else 'X', ax=ax_f)
     
-    pdf_out = generate_pdf(df_plot, fig_f, report_custom_title, sel_a)
-    st.download_button("📥 Descarregar PDF", pdf_out, "relatorio.pdf", "application/pdf")
+    # Gera o PDF usando o game_name da sidebar
+    pdf_out = generate_pdf(df_plot, fig_f, game_name, sel_a)
+    st.download_button("📥 Descarregar PDF", pdf_out, f"Relatorio_{game_name.replace(' ', '_')}.pdf", "application/pdf")
 else:
     st.info("O campo está pronto. Registe ações para gerar relatórios.")
