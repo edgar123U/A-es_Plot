@@ -158,7 +158,7 @@ if not st.session_state.actions.empty:
     def generate_pdf(df_filt, fig_pitch, report_title, current_sel_a):
         pdf = FPDF()
         pdf.add_page()
-        if os.path.exists(fmh_logo_path): pdf.image(fmh_logo_path, x=165, y=10, w=30)
+        if os.path.exists(fmh_logo_path): pdf.image(fmh_logo_path, x=165, y=10, w=20)
         pdf.set_font("Helvetica", "B", 18); pdf.set_y(15); pdf.cell(150, 10, report_title, ln=True)
         pdf.set_font("Helvetica", "", 10); pdf.cell(150, 6, "Faculdade de Motricidade Humana", ln=True)
         
@@ -167,7 +167,7 @@ if not st.session_state.actions.empty:
         pdf.image(img_buf, x=15, y=35, w=180)
         
         pdf.set_y(172)
-        if current_sel_a == "Todas":
+        if current_sel_a == "":
             pdf.set_font("Helvetica", "B", 10); pdf.cell(190, 8, "Legenda:", ln=True)
             pdf.set_font("Helvetica", "", 8)
             for act, info in action_rules.items():
