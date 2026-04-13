@@ -11,7 +11,7 @@ import os
 st.set_page_config(page_title="Relatório Tecnico-Tático", layout="wide")
 
 # --- FICHEIRO DO LOGO ---
-fmh_logo_path = "faculdade_de_motricidade_humana_logo.jpeg"
+fmh_logo_path = "3880_imgbank.png"
 
 # 2. ESTADO DA SESSÃO
 if 'actions' not in st.session_state:
