@@ -43,7 +43,7 @@ action_rules = {
     'Bloqueio': {'cor': '#e67e22', 'seta': False, 'tem_resultado': False},
     'Desarme': {'cor': '#1abc9c', 'seta': False, 'tem_resultado': True},
     'VCJ': {'cor': '#FFA500', 'seta': True, 'tem_resultado': True},
-    'VCJ': {'cor': '#FFA500', 'seta': False, 'tem_resultado': False}
+    'Falta': {'cor': '#FFA500', 'seta': False, 'tem_resultado': False}
 }
 
 # 3. CABEÇALHO
