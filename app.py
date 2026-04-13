@@ -41,7 +41,8 @@ action_rules = {
     'Remate': {'cor': '#f1c40f', 'seta': False, 'tem_resultado': True},
     'Interceção': {'cor': '#2ecc71', 'seta': False, 'tem_resultado': False},
     'Bloqueio': {'cor': '#e67e22', 'seta': False, 'tem_resultado': False},
-    'Desarme': {'cor': '#1abc9c', 'seta': False, 'tem_resultado': True}
+    'Desarme': {'cor': '#1abc9c', 'seta': False, 'tem_resultado': True},
+    'VCJ': {'cor': '#FFA500', 'seta': True, 'tem_resultado': True}
 }
 
 # 3. CABEÇALHO
@@ -221,6 +222,6 @@ if not st.session_state.actions.empty:
         else: p_final.scatter(r.x, r.y, s=180, c=r.Cor, marker='o' if r.Resultado=='Sucesso' else 'X', ax=ax_f)
     
     pdf_out = generate_pdf(df_plot, fig_f, report_custom_title, sel_a)
-    st.download_button("📥 Descarregar PDF", pdf_out, "relatorio_FMH.pdf", "application/pdf")
+    st.download_button("📥 Descarregar PDF", pdf_out, "relatorio.pdf", "application/pdf")
 else:
     st.info("O campo está pronto. Registe ações para gerar relatórios.")
